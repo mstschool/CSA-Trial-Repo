@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Game {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Initialize the game components (replace with the actual constructors and methods from the student classes)
+        Hero hero = new Hero("John Doe", 100);
+        Enemy enemy = new Enemy("Evil Monster", 50);
+        Setting setting = new Setting("Mysterious Forest");
+        Inventory inventory = new Inventory();
+        Puzzle puzzle = new Puzzle();
+
+        System.out.println("Welcome to our text-based video game!");
+        System.out.println("You find yourself in the " + setting.getName() + ".");
+
+        boolean playing = true;
+        while (playing) {
+            System.out.println("Choose an action: [1] Attack enemy, [2] Pick up item, [3] Solve puzzle, [4] Quit");
+            int action = scanner.nextInt();
+
+            switch (action) {
+                case 1:
+                    hero.attack(enemy);
+                    break;
+                case 2:
+                    System.out.println("Enter the item name:");
+                    String itemName = scanner.next();
+                    inventory.addItem(itemName);
+                    break;
+                case 3:
+                    System.out.println("Enter your solution:");
+                    String solution = scanner.next();
+                    boolean success = puzzle.solve(solution);
+                    if (success) {
+                        System.out.println("You solved the puzzle!");
+                    } else {
+                        System.out.println("Incorrect solution. Try again.");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Thanks for playing!");
+                    playing = false;
+                    break;
+                default:
+                    System.out.println("Invalid action. Please try again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+
