@@ -1,0 +1,83 @@
+public class Inventory {
+    private String[] items;
+    private int[] quantities;
+    private int itemCount;
+
+    public Inventory(int capacity) {
+        items = new String[capacity];
+        quantities = new int[capacity];
+        itemCount = 0;
+    }
+
+    public void addItem(String itemName, int quantity) {
+        int existingIndex = findItemIndex(itemName);
+        if (existingIndex != -1) {
+            quantities[existingIndex] += quantity;
+        } else {
+            if (itemCount < items.length) {
+                items[itemCount] = itemName;
+                quantities[itemCount] = quantity;
+                itemCount++;
+            } else {
+                System.out.println("Inventory is full. Cannot add item: " + itemName);
+            }
+        }
+    }
+
+    public void removeItem(String itemName, int quantity) {
+        int itemIndex = findItemIndex(itemName);
+        if (itemIndex != -1) {
+            if (quantities[itemIndex] >= quantity) {
+                quantities[itemIndex] -= quantity;
+                if (quantities[itemIndex] == 0) {
+                    removeItemAtIndex(itemIndex);
+                }
+            } else {
+                System.out.println("Insufficient quantity for item: " + itemName);
+            }
+        } else {
+            System.out.println("The item " + itemName + "is not found.");
+        }
+    }
+
+    private int findItemIndex(String itemName) {
+        for (int i = 0; i < itemCount; i++) {
+            if (items[i].equals(itemName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void removeItemAtIndex(int index) {
+        for (int i = index; i < itemCount - 1; i++) {
+            items[i] = items[i + 1];
+            quantities[i] = quantities[i + 1];
+        }
+        itemCount--;
+        items[itemCount] = null;
+        quantities[itemCount] = 0;
+    }
+
+    public void displayInventory() {
+        System.out.println("Here is your inventory:");
+        for (int i = 0; i < itemCount; i++) {
+            System.out.println(items[i] + ": " + quantities[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory(5);
+
+        inventory.addItem("chicken breast", 5);
+        inventory.addItem("knives", 3);
+        inventory.addItem("shotgun", 2);
+
+        inventory.displayInventory();
+
+        inventory.removeItem("caviar", 2);
+        inventory.removeItem("butter knife", 5);
+
+        inventory.displayInventory();
+    }
+}
