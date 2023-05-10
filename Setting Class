@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class GameSettings {
+    private String weather;
+    private String location;
+    
+    public GameSettings() {
+        this.weather = "Sunny";
+        this.location = "City";
+    }
+    
+    public void showSettings() {
+        System.out.println("Current game settings:");
+        System.out.println("Weather: " + weather);
+        System.out.println("Location: " + location);
+    }
+    
+    public void updateSettings() {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Select weather condition: (Sunny/Rainy/Snowy)");
+        weather = input.nextLine();
+        
+        System.out.println("Select game location: (City/Forest/Desert)");
+        location = input.nextLine();
+    }
+    
+    public String getWeather() {
+        return weather;
+    }
+    
+    public String getLocation() {
+        return location;
+    }
+}
