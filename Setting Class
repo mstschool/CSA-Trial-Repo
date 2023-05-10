@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class GameSettings {
+public class Settings {
     private String weather;
     private String location;
     
-    public GameSettings() {
+    public Settings() {
         this.weather = "Sunny";
         this.location = "City";
     }
