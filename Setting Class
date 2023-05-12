@@ -4,7 +4,7 @@ public class Settings {
     private String weather;
     private String location;
     
-    public Settings() {
+    public Settings(String weather, String location) {
         this.weather = "Sunny";
         this.location = "City";
     }
